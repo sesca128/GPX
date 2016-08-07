@@ -5423,7 +5423,7 @@ int gpx_convert_line(Gpx *gpx, char *gcode_line)
 
                 // M126 - Turn blower fan on (valve open)
             case 126: {
-                int state = (gpx->command.flag & S_IS_SET) ? ((unsigned)gpx->command.s ? 1 : 0) : 1;
+                unsigned state = (gpx->command.flag & S_IS_SET) ? ((unsigned)gpx->command.s) : 1;
                 if(gpx->flag.dittoPrinting) {
                     CALL( set_valve(gpx, B, state) );
                     CALL( set_valve(gpx, A, state) );
