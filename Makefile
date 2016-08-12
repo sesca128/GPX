@@ -10,7 +10,7 @@ endif
 
 ifeq ($(TARGET), mingw64)
 
-CC = /opt/mingw64/cross_win64/bin/x86_64-w64-mingw32-gcc
+CC = x86_64-w64-mingw32-gcc
 CC_FLAGS =
 L_FLAGS = -lm
 PLATFORM = win64
@@ -18,7 +18,7 @@ EXE = '.exe'
 
 else ifeq ($(TARGET), mingw32)
 
-CC = /opt/mingw32/cross_win32/bin/i686-w64-mingw32-gcc
+CC = i686-w64-mingw32-gcc
 CC_FLAGS =
 L_FLAGS = -lm
 PLATFORM = win32
