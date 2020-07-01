@@ -5312,6 +5312,14 @@ int gpx_convert_line(Gpx *gpx, char *gcode_line)
 		    int state = (gpx->command.flag & S_IS_SET) ? ((unsigned)gpx->command.s ? 1 : 0) : 1;
 		    if(gpx->flag.reprapFlavor || gpx->flag.M106AlwaysValve) {
 			 // Toggle valve
+			 unsigned state = 1;
+
+			 if (gpx->command.flag & S_IS_SET){
+				// Just map s=1 to 0, we cannot map to 1 due to the 1 => full power meaning
+				// Also always set bit 0 (when on) for compatibility with legacy firmware
+			   state = (gpx->command.s > 1) ?  ((unsigned)gpx->command.s | 1) : 0;
+			 }
+
 			 if(gpx->flag.dittoPrinting) {
 			      CALL( set_valve(gpx, B, state) );
 			      CALL( set_valve(gpx, A, state) );
